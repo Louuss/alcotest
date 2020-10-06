@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  mongo:
+    image: mongo:latest
+    ports:
+      - 27017:27017
+    volumes:
+      - ./data:/data/db
+    networks:
+      - el-network 
+  api:
+    links: 
+      - mongo
+    build: ./server
+    ports:
+      - 5000:5000
+    volumes:
+      - ./server:/src
+    networks:
+      - el-network 
+  app:
+    build: ./app
+    ports:
+      - 8080:8080
+    volumes:
+      - ./app:/src
+    networks:
+      - el-network 
+volumes:
+  mongodb_data_container:
+
+networks:
+  el-network:
