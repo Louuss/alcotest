@@ -9,7 +9,7 @@ router.get('/', async (req, res) => {
     res.send(await drinks.find({}).sort({ 'date': -1 }).toArray());
 })
 
-// ADD
+// POST
 router.post('/', async (req, res) => {
     const drinks = await loadDrinksCollection();
 
